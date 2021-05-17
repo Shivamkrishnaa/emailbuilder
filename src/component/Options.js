@@ -195,7 +195,7 @@ function Header(prop) {
         </div>
         <Divider />
         <List selected  subheader={
-        <ListSubheader component="h1" id="nested-list-subheader">
+        <ListSubheader id="nested-list-subheader">
           Drag from here.
         </ListSubheader>
       }>
@@ -212,6 +212,9 @@ function Header(prop) {
             </Draggable>
           ))}
            <Divider />
+           <ListSubheader id="nested-list-subheader">
+          Settings
+        </ListSubheader>
           <ListItem button onClick={()=>prop.download()}>
             <ListItemIcon>
             {React.createElement(Icons['GetApp'])}
