@@ -1,5 +1,4 @@
-import SaveIcon from '@material-ui/icons/Save';
-import Button from '@material-ui/core/Button';
+import ListSubheader from '@material-ui/core/ListSubheader';
 import { Container, Draggable } from 'react-smooth-dnd';
 import React from 'react';
 import PropTypes from 'prop-types'
@@ -195,7 +194,11 @@ function Header(prop) {
           </IconButton>
         </div>
         <Divider />
-        <List selected>
+        <List selected  subheader={
+        <ListSubheader component="h1" id="nested-list-subheader">
+          Drag from here.
+        </ListSubheader>
+      }>
           <Container groupName="1" behaviour="copy" getChildPayload={i => prop.data.list[i]} >
           {prop.data.list
           .map(({text, icon}, index) => (

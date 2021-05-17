@@ -155,7 +155,7 @@ React.useEffect(()=>{
         <div className={classes.appBarSpacer} />
          <Container style={{ height: "100%", "border-style": "dashed", "border-color": '#7cbde8' }}  groupName="1" getChildPayload={i => myMjml[i]} onDrop={e => setMyMjml(applyDrag(myMjml, e))} >
          {
-          (!myMjml || !myMjml.length)  ? <div className={classes.paper} >  <h1>Drop here</h1></div>:  myMjml.map((p, i) => {
+          (!myMjml || !myMjml.length)  ? <div className={classes.paper} >  <h1>No content here. Drag new from 'Content' panel.</h1></div>:  myMjml.map((p, i) => {
              return (
                <Draggable key={i} >
 
