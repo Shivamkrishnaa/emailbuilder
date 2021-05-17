@@ -61,7 +61,7 @@ function App(props) {
     setMyMjml(temp);
   };
   function toggleEditor(i, status) {
-    if(!['text','bullet'].includes(myMjml[i]['id'])) return ;
+    if(!['text','bullet','button'].includes(myMjml[i]['id'])) return ;
     const temp = JSON.parse(JSON.stringify(myMjml));
     if(status) temp[i].open = status;
     else temp[i].open = !temp[i].open; 
