@@ -195,7 +195,6 @@ const Child = forwardRef((prop, ref) => {
         }}
         anchor="right"
       >
-        <div className={classes.toolbar} />
 
         <AppBar position="static">
           <Tabs TabIndicatorProps={{ style: { background: 'black' } }} style={{ backgroundColor: "#3498db" }} value={value} onChange={handleChange} aria-label="Builder Options" >

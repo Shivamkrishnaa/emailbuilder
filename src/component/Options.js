@@ -27,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   appBar: {
-    zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -196,7 +195,7 @@ function Header(prop) {
         <Divider />
         <List selected  subheader={
         <ListSubheader id="nested-list-subheader">
-          Drag from here.
+          {open?"Drag from here.":'Drag...'}
         </ListSubheader>
       }>
           <Container groupName="1" behaviour="copy" getChildPayload={i => prop.data.list[i]} >
@@ -213,7 +212,8 @@ function Header(prop) {
           ))}
            <Divider />
            <ListSubheader id="nested-list-subheader">
-          Settings
+           {open?"Setting":'Set...'}
+
         </ListSubheader>
           <ListItem button onClick={()=>prop.download()}>
             <ListItemIcon>
