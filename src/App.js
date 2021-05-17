@@ -25,11 +25,15 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
     minHeight: "100vh",
     alignItems:'center',
-    alignContent:'center'
+    alignContent:'center'    
   },
   paper:{
-    maxWidth: 600,
-  }
+    height:"100vh",
+    textAlign: 'center',
+    paddingTop: "25%"
+
+  },
+  appBarSpacer: theme.mixins.toolbar,
 }));
 
 function App(props) {
@@ -147,13 +151,11 @@ React.useEffect(()=>{
         <Options save={save.bind(this)} reset={reset.bind(this)} download={mjmlToHtml.bind(this)} {...props} sendData={childData} data={constants.options} ></Options>
         
         
-        <main style={{ backgroundColor: "white", height: "100%" }} className={classes.content}>
-        <br/><br/>
-        <hr></hr>
-       
-         <Container  groupName="1" getChildPayload={i => myMjml[i]} onDrop={e => setMyMjml(applyDrag(myMjml, e))} >
+        <main style={{ height: "100%", background: "#fefeff" }} className={classes.content}>
+        <div className={classes.appBarSpacer} />
+         <Container style={{ height: "100%", "border-style": "dashed", "border-color": '#7cbde8' }}  groupName="1" getChildPayload={i => myMjml[i]} onDrop={e => setMyMjml(applyDrag(myMjml, e))} >
          {
-          (!myMjml || !myMjml.length)  ? <h1>Drop here</h1>:  myMjml.map((p, i) => {
+          (!myMjml || !myMjml.length)  ? <div className={classes.paper} >  <h1>Drop here</h1></div>:  myMjml.map((p, i) => {
              return (
                <Draggable key={i} >
 
@@ -198,17 +200,13 @@ React.useEffect(()=>{
                   ) :''} 
                </Grid>
              </Grid>
-             <br/>
-             <br/>
                </Draggable>
              );
            })
          }
        </Container>
     
-        
-          <hr></hr>
-          <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+      
         </main>
         <Edit {...props} setBorderWidth={setBorderWidth.bind(this)}setBorderRadius={setBorderRadius.bind(this)} setFontSize={setFontSize.bind(this)} setWidth={setWidth.bind(this)} setHeight={setHeight.bind(this)}  setSrc={setSrc.bind(this)} setHref={setHref.bind(this)} changeColor={colorEditor.bind(this)} data={{list: myMjml, title: "Edit", edge: "end" }} sendData={childData} deleteItem={deleteItem.bind(this)} toggleEditor={toggleEditor.bind(this)} ></Edit>
     </div>

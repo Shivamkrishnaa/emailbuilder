@@ -125,7 +125,7 @@ const client = filestack.init('AfKryki4LQQaa2AhVpGTjz');
         <div className={classes.toolbar} />
        
       <AppBar position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="Builder Options" >
+        <Tabs TabIndicatorProps={{style: {background:'black'}}} style={{backgroundColor: "#3498db"}} value={value} onChange={handleChange} aria-label="Builder Options" >
           <Tab label="Items" {...a11yProps(0)} />
           <Tab label="Edit" {...a11yProps(1)} disabled={disabled}/>
         </Tabs>

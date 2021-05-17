@@ -195,7 +195,7 @@ function Header(prop) {
           </IconButton>
         </div>
         <Divider />
-        <List>
+        <List selected>
           <Container groupName="1" behaviour="copy" getChildPayload={i => prop.data.list[i]} >
           {prop.data.list
           .map(({text, icon}, index) => (
@@ -209,19 +209,19 @@ function Header(prop) {
             </Draggable>
           ))}
            <Divider />
-          <ListItem  onClick={()=>prop.download()}>
+          <ListItem button onClick={()=>prop.download()}>
             <ListItemIcon>
             {React.createElement(Icons['GetApp'])}
             </ListItemIcon>
             <ListItemText primary="Download" />
           </ListItem>
-          <ListItem  onClick={()=>prop.save()}>
+          <ListItem button onClick={()=>prop.save()}>
             <ListItemIcon>
             {React.createElement(Icons['Save'])}
             </ListItemIcon>
-            <ListItemText primary="Save" />
+            <ListItemText button primary="Save" />
           </ListItem>
-          <ListItem  onClick={()=>prop.reset()}>
+          <ListItem button onClick={()=>prop.reset()}>
             <ListItemIcon>
             {React.createElement(Icons['Delete'])}
             </ListItemIcon>
