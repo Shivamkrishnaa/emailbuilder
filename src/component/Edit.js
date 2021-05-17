@@ -24,6 +24,7 @@ import Tab from '@material-ui/core/Tab';
 import { HexColorPicker } from "react-colorful";
 import Dropzone from 'react-dropzone'
 import * as filestack from 'filestack-js';
+import * as Icons from '@material-ui/icons/';
 
 const drawerWidth = 280;
 const useStyles = makeStyles((theme) => ({
