@@ -11,7 +11,6 @@ const useStylesBase = makeStyles({
 
 
 export default function MyComponent(props) {
-    console.log(props.attributes,'props.attributes');
     const useStyles = makeStyles({
       root: props.attributes,
       typo: {

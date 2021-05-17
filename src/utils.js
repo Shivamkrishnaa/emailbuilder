@@ -129,7 +129,6 @@ const mjmlColumns = (section) => {
   }
   
   export const getMjml = ({ header, body, list }) => {
-    console.log(list,'list');
     return {
       tagName: MJML.MJML,
       attributes: header || {},
