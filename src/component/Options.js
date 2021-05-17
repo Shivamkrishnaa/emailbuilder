@@ -19,6 +19,8 @@ import { fade} from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import withWidth, { isWidthDown } from '@material-ui/core/withWidth';
 import * as Icons from '@material-ui/icons/';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -126,7 +128,12 @@ const useStyles = makeStyles((theme) => ({
 function Header(prop) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-
+  const matches = useMediaQuery('(min-width:1024px)');
+  React.useEffect( () => {
+    if(matches) setOpen(true);
+     else setOpen(false);
+  }, [matches])
+  
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -159,7 +166,7 @@ function Header(prop) {
             })}
           >
             <Typography variant="h6" noWrap>
-            {(prop.data.title && prop.data.title.length)  ? prop.data.title[0]:"-"}
+            {(prop.data.title && prop.data.title.length)  ? React.createElement(Icons['BorderAll']):"-"}
             </Typography>
           </IconButton>
             <MenuIcon onClick={open? handleDrawerClose : handleDrawerOpen}/>
@@ -194,8 +201,6 @@ function Header(prop) {
           .map(({text, icon}, index) => (
             <Draggable key={index}>
               <ListItem button key={text.toUpperCase()} /* onClick={()=>routeChange(link)} */>
-                <div>
-                    </div>
                 <ListItemIcon>
                     {React.createElement(Icons[icon])}
                 </ListItemIcon>
@@ -203,45 +208,28 @@ function Header(prop) {
             </ListItem>
             </Draggable>
           ))}
+           <Divider />
+          <ListItem  onClick={()=>prop.download()}>
+            <ListItemIcon>
+            {React.createElement(Icons['GetApp'])}
+            </ListItemIcon>
+            <ListItemText primary="Download" />
+          </ListItem>
+          <ListItem  onClick={()=>prop.save()}>
+            <ListItemIcon>
+            {React.createElement(Icons['Save'])}
+            </ListItemIcon>
+            <ListItemText primary="Save" />
+          </ListItem>
+          <ListItem  onClick={()=>prop.reset()}>
+            <ListItemIcon>
+            {React.createElement(Icons['Delete'])}
+            </ListItemIcon>
+            <ListItemText primary="Reset" />
+          </ListItem>
           </Container>
         </List>
         <Divider />
-        <Button
-        variant="contained"
-        color="primary"
-        size="large"
-        className={classes.button}
-        onClick={()=>prop.download()}
-        startIcon={<SaveIcon />}
-      >
-        Download
-      </Button>
-      <br />
-
-      <Button
-        variant="contained"
-        color="primary"
-        size="large"
-        className={classes.button}
-        onClick={()=>prop.save()}
-        startIcon={<SaveIcon />}
-      >
-        Save
-      </Button>
-      <br />
-
-      <Button
-        variant="contained"
-        color="primary"
-        size="large"
-        className={classes.button}
-        onClick={()=>prop.reset()}
-        startIcon={<SaveIcon />}
-      >
-        Reset
-      </Button>
-      <br />
-
       </Drawer>
     </div>
   );
