@@ -34,7 +34,8 @@ const constants = {
              "attributes":{
                 "src":"https://raw.githubusercontent.com/roadmanfong/react-cropper/master/example/img/child.jpg",
                 "width":"300px",
-                "height":"300px"
+                "height":"300px",
+                "href":null
              }
           },
           {
@@ -45,7 +46,7 @@ const constants = {
              "initialValue":"BUTTON",
              "open":false,
              "attributes":{
-                "href":null,
+                "href":"google.com",
                 "color":"white",
                 "fontFamily":"Helvetica",
                 "backgroundColor":"red",
@@ -62,7 +63,7 @@ const constants = {
             "initialValue":"BUTTON",
             "open":false,
             "attributes":{
-               "href":null,
+               "href":'google.com',
                "color":"white",
                "fontFamily":"Helvetica",
                "backgroundColor":"red",

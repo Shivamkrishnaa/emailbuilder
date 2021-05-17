@@ -56,10 +56,11 @@ function App(props) {
   }
   const [myMjml, setMyMjml] = React.useState([]);
   const classes = useStyles();
+  const childRef = React.useRef();
   function childData(a) {
     alert(a);
   }
-  App.handleClickOutside = () =>{ 
+  function handleClickOutside() { 
     const temp = JSON.parse(JSON.stringify(myMjml)); 
     Object.keys(temp).filter(i => temp[i].hasOwnProperty('open')).map(i => temp[i].open = false); 
     setMyMjml(temp);
@@ -117,6 +118,11 @@ function setBorderWidth(i, value){
  temp[i].attributes.borderWidth = value+"px";
  return setMyMjml(temp);
 }
+function setBorderColor(i, value){
+  const temp = JSON.parse(JSON.stringify(myMjml));
+ temp[i].attributes.borderColor = value;
+ return setMyMjml(temp);
+}
 function save(){
   localStorage.setItem('mjml',JSON.stringify(myMjml));
 }
@@ -128,7 +134,6 @@ React.useEffect(()=>{
   if(localStorage.getItem('mjml')) setMyMjml(JSON.parse(localStorage.getItem('mjml'))) ;
 },[])
  const Builder = (i, p) => {
-   console.log(p.attributes.fontSize,'p.attributes.fontSize');
   switch (myMjml[i]['id']) {
     case "text":
       return parse(p.html);
@@ -153,7 +158,7 @@ React.useEffect(()=>{
         
         <main style={{ height: "100%", background: "#fefeff" }} className={classes.content}>
         <div className={classes.appBarSpacer} />
-         <Container style={{ height: "100%", "border-style": "dashed", "border-color": '#7cbde8' }}  groupName="1" getChildPayload={i => myMjml[i]} onDrop={e => setMyMjml(applyDrag(myMjml, e))} >
+         <Container style={{ height: "100%", "border-style": "dashed", "border-color": '#7cbde8' }}  groupName="1" getChildPayload={i => myMjml[i]} onDrop={e => {childRef.current.resetEditor();handleClickOutside();setMyMjml(applyDrag(myMjml, e))}} >
          {
           (!myMjml || !myMjml.length)  ? <div className={classes.paper} >  <h1>No content here. Drag new from 'Content' panel.</h1></div>:  myMjml.map((p, i) => {
              return (
@@ -208,7 +213,7 @@ React.useEffect(()=>{
     
       
         </main>
-        <Edit {...props} setBorderWidth={setBorderWidth.bind(this)}setBorderRadius={setBorderRadius.bind(this)} setFontSize={setFontSize.bind(this)} setWidth={setWidth.bind(this)} setHeight={setHeight.bind(this)}  setSrc={setSrc.bind(this)} setHref={setHref.bind(this)} changeColor={colorEditor.bind(this)} data={{list: myMjml, title: "Edit", edge: "end" }} sendData={childData} deleteItem={deleteItem.bind(this)} toggleEditor={toggleEditor.bind(this)} ></Edit>
+        <Edit ref={childRef} {...props} setBorderColor={setBorderColor.bind(this)} setBorderWidth={setBorderWidth.bind(this)} setBorderRadius={setBorderRadius.bind(this)} setFontSize={setFontSize.bind(this)} setWidth={setWidth.bind(this)} setHeight={setHeight.bind(this)}  setSrc={setSrc.bind(this)} setHref={setHref.bind(this)} changeColor={colorEditor.bind(this)} data={{list: myMjml, title: "Edit", edge: "end" }} sendData={childData} deleteItem={deleteItem.bind(this)} toggleEditor={toggleEditor.bind(this)} ></Edit>
     </div>
   );
 }
