@@ -1,31 +1,19 @@
-import clsx from 'clsx';
-import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import json2mjml from 'json2mjml'
-// import { Draggable, DragDropContext, Droppable } from "react-beautiful-dnd";
-import React, { useRef, useState } from 'react';
+import React, { useRef} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Editor } from '@tinymce/tinymce-react';
-import onClickOutside from 'react-onclickoutside';
 import * as filestack from 'filestack-js';
-import Modal from '@material-ui/core/Modal';
 
 import Options from './component/Options';
 import Edit from './component/Edit';
-import Test from './component/test';
 import constants from './config/constant';
 import axios from 'axios';
 import parse from 'html-react-parser';
 import { Container, Draggable } from 'react-smooth-dnd';
-import { applyDrag, generateItems } from './component/utils';
-import { generateID, getMjml, downloadFile } from './utils';
-import { htmlToText } from 'html-to-text';
-import ReactModal from 'react-modal';
-import { PortalWithState } from 'react-portal';
-import { Portal } from 'react-portal';
+import { applyDrag } from './component/utils';
+import { getMjml, downloadFile } from './utils';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,7 +37,6 @@ function App(props) {
 
   const mjmlToHtml = function (previewed) {
     const parsedMjml = getMjml({body: {}, header: {},list:JSON.parse(JSON.stringify(myMjml))});
-    // console.log(parsedMjml.children[0].children[0].children[0].children[0],'myMjml');
     return axios.post(
       'https://api.mjml.io/v1/render',
       JSON.stringify({ mjml: JSON.stringify(parsedMjml) }),
@@ -62,21 +49,8 @@ function App(props) {
       }
   })
   .catch(e => {
-    // console.log(e);
   })
-     // console.log(constants);
-    // axios({
-    //   method: constants.api.mjml.method,
-    //   url: constants.api.mjml.url,
-    //   data: {
-    //     json: parsedMjml/* ||json2mjml() */
-    //   }
-    // })
-    //   .then(r => {
-    //     downloadFile('tesserae.html', r.data.data.html, 'html')
-    //     // var reactElement = parse(r.data.data.html);
-    //     // setHtml(reactElement);
-    //   })
+
   }
   const [myMjml, setMyMjml] = React.useState([]);
   const [html, setHtml] = React.useState(false);
@@ -212,7 +186,6 @@ React.useEffect(()=>{
                  plugins: [ 'link filestack advlist autolink lists link image charmap print preview anchor', 'searchreplace visualblocks code fullscreen', 'insertdatetime media table paste code help wordcount' ],
                  toolbar: (['text','bullet'].includes(myMjml[i]['id']) ? "| image | link | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |  bold italic backcolor " : ' |  bold italic ')+ ' | linkremoveformat | undo redo | formatselect | ' + 'removeformat | help',
                  content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }' ,
-                 // onMouseOut: (r)=>{console.log(r);},
                  images_upload_handler: async function( blobInfo, success, failure ) {
                    try{
                      return client.upload(blobInfo.base64())
@@ -244,8 +217,5 @@ React.useEffect(()=>{
     </div>
   );
 }
-// const clickOutsideConfig = {
-//   handleClickOutside: () => App.handleClickOutside
-// };
 
 export default App;
