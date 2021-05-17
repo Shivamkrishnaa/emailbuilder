@@ -43,9 +43,7 @@ function App(props) {
       { auth: { username: '98e46f77-2126-4db5-8bf7-edd960d5738c', password: 'd264dc69-5a72-4aab-b237-91c13a033f97' }}
   ).then((res) => {
       if(res.data) {
-        if(!previewed) downloadFile('tesserae.html', res.data.html, 'html');
-        var reactElement = parse(res.data.html);
-        setHtml(reactElement);
+        if(!previewed) downloadFile(`Email-${Date.now()}.html`, res.data.html, 'html');
       }
   })
   .catch(e => {
@@ -53,7 +51,6 @@ function App(props) {
 
   }
   const [myMjml, setMyMjml] = React.useState([]);
-  const [html, setHtml] = React.useState(false);
   const classes = useStyles();
   function childData(a) {
     alert(a);
@@ -184,7 +181,7 @@ React.useEffect(()=>{
                  file_picker_types: "file image media",
                  filestack_api_key: 'AfKryki4LQQaa2AhVpGTjz',
                  plugins: [ 'link filestack advlist autolink lists link image charmap print preview anchor', 'searchreplace visualblocks code fullscreen', 'insertdatetime media table paste code help wordcount' ],
-                 toolbar: (['text','bullet'].includes(myMjml[i]['id']) ? "| image | link | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |  bold italic backcolor " : ' |  bold italic ')+ ' | linkremoveformat | undo redo | formatselect | ' + 'removeformat | help',
+                 toolbar: (['text','bullet'].includes(myMjml[i]['id']) ? "| image | link | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |  bold italic backcolor " : ' |  bold italic ')+ ' | linkremoveformat | undo redo | formatselect | removeformat | help',
                  content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }' ,
                  images_upload_handler: async function( blobInfo, success, failure ) {
                    try{

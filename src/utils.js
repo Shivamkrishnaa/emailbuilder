@@ -15,11 +15,6 @@ const MJML = {
     ALL: 'mj-all',
     DIVIDER: 'mj-divider'
   };
-export const generateID = () => 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-    const r = Math.random() * 16 | 0
-    const v = c == 'x' ? r : (r & 0x3 | 0x8);
-    return v.toString(16);
-});
 export const downloadFile = ( filename, content, type ) => {
   var file = new Blob([content], {type: type})
   if (window.navigator.msSaveOrOpenBlob) // IE10+
@@ -145,7 +140,6 @@ const mjmlColumns = (section) => {
     }
   }
 export default {
-    generateID,
     getMjml,
     downloadFile
 }
